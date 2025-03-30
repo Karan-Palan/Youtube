@@ -18,12 +18,12 @@ const items = [
   },
   {
     title: "Liked Videos",
-    url: "/feed/liked",
+    url: "/playlists/liked",
     icon: HeartIcon,
   },
   {
     title: "Playlists",
-    url: "/feed/playlists",
+    url: "/playlists",
     icon: ListVideoIcon,
   },
 ];
