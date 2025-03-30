@@ -8,6 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
+import { useAuth, useClerk } from "@clerk/nextjs";
 
 const items = [
   {
@@ -24,10 +25,14 @@ const items = [
     title: "Subscriptions",
     url: "/feed/subscriptions",
     icon: PlaySquareIcon,
+    auth: true,
   },
 ];
 
 export const MainSection = () => {
+  const clerk = useClerk();
+  const { isSignedIn } = useAuth();
+
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -38,11 +43,16 @@ export const MainSection = () => {
                 tooltip={item.title}
                 asChild
                 isActive={false} // change to look at pathname using router
-                // onClick={() => {}} // todo
+                onClick={(e) => {
+                  if (!isSignedIn && item.auth) {
+                    e.preventDefault();
+                    return clerk.openSignIn();
+                  }
+                }}
               >
                 <Link href={item.url} className="flex items-center gap-4">
-                    <item.icon/>
-                    <span className="text-sm">{item.title}</span>
+                  <item.icon />
+                  <span className="text-sm">{item.title}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
