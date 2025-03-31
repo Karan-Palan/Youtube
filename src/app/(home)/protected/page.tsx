@@ -1,7 +1,5 @@
-export const Page = () => {
-    return (
-        <div>
-            Auth users
-        </div>
-    )
-}
+const Page = () => {
+  return <div>Only logged in users can see</div>;
+};
+
+export default Page;
