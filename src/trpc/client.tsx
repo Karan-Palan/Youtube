@@ -20,6 +20,7 @@ function getQueryClient() {
 function getUrl() {
   const base = (() => {
     if (typeof window !== "undefined") return "";
+    // todo - update when not using vercel
     if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
     return "http://localhost:3000";
   })();
